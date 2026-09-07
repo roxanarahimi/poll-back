@@ -51,7 +51,7 @@ class UserPollResource extends Resource
     {
         return [
             'index' => ListUserPolls::route('/'),
-            'create' => CreateUserPoll::route('/create'),
+//            'create' => CreateUserPoll::route('/create'),
             'view' => ViewUserPoll::route('/{record}'),
             'edit' => EditUserPoll::route('/{record}/edit'),
         ];
