@@ -27,16 +27,16 @@ class UserController extends Controller
         }catch(\Exception $e){
             return $e->getMessage();
         }
-    } public function answer(Request $request)
+    } public function saveAnswer(Request $request)
     {
         try {
-            $data = $request['answers'];
-            foreach ($data as $answer) {
+            foreach ($request['answers'] as $id) {
                 UserPoll::create([
                     'user_id' => $request['user_id'],
-                    'question_option_id' => $answer['question_option_id'],
+                    'question_option_id' => $id,
                 ]);
             }
+
             $user = User::find($request['user_id']);
             return response(new UserResource($user),200);
         }catch(\Exception $e){
