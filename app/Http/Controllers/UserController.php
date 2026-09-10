@@ -80,6 +80,7 @@ class UserController extends Controller
         try {
             $mobile = $this->faToEn($request['mobile']);
             $inputCode = $this->faToEn($request['code']);
+            return Cache::get($mobile);
             $code = Cache::get($mobile);
 
             if ($code === $inputCode) {
