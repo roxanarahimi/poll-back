@@ -44,7 +44,7 @@ class UserController extends Controller
     public function sendSms(Request $request): Response
     {
         try {
-            return $request;
+            return response($request,100);
             $api = new \Kavenegar\KavenegarApi("4470686233536566795848666962306F59327335574D786772655075704668586C31415162524E717747413D");
             $sender = "10005989";
             $message = $request['message'];
