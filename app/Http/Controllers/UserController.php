@@ -47,9 +47,8 @@ class UserController extends Controller
             $api = new \Kavenegar\KavenegarApi("4470686233536566795848666962306F59327335574D786772655075704668586C31415162524E717747413D");
             $sender = "10005989";
             $message = $request['message'];
-            $receptor = array($request['mobile']);
+            $receptor = $request['mobile'];
             $result = $api->Send($sender, $receptor, $message);
-            return $result;
             if ($result) {
                 $info = [
                     "messageid" => $result[0]->messageid,
