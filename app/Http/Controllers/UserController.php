@@ -28,10 +28,7 @@ class UserController extends Controller
                 'message' => $text,
             ]);
 
-            $send = $this->sendSms([
-                'mobile' => $mobile,
-                'message' => $text,
-            ]);
+            $send = $this->sendSms($sms);
             Cache::put($mobile, $code, 60);
             if ($send->getStatusCode() === 200) {
                 return response(['message' => 'کد تایید ارسال شد.'], 200);
@@ -47,7 +44,6 @@ class UserController extends Controller
     public function sendSms(Request $request): Response
     {
         try {
-            return response($request,200);
             $api = new \Kavenegar\KavenegarApi("4470686233536566795848666962306F59327335574D786772655075704668586C31415162524E717747413D");
             $sender = "10005989";
             $message = $request['message'];
