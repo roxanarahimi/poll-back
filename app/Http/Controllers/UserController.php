@@ -71,7 +71,7 @@ class UserController extends Controller
             return response($e->errorMessage(),$e->getCode());
         } catch (\Kavenegar\Exceptions\HttpException $e) {
             // در زمانی که مشکلی در برقرای ارتباط با وب سرویس وجود داشته باشد این خطا رخ می دهد
-            response($e->errorMessage(),$e->getCode());
+            return response($e->errorMessage(),$e->getCode());
         }
     }
 
