@@ -10,7 +10,6 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Cache;
-use Kavenegar\KavenegarApi;
 
 class UserController extends Controller
 {
@@ -42,7 +41,7 @@ class UserController extends Controller
         }
     }
 
-    public function sendSms(Request $request)
+    public function sendSms(Request $request): Response
     {
         try {
             $api = new \Kavenegar\KavenegarApi("4470686233536566795848666962306F59327335574D786772655075704668586C31415162524E717747413D");
@@ -69,10 +68,10 @@ class UserController extends Controller
 
         } catch (\Kavenegar\Exceptions\ApiException $e) {
             // در صورتی که خروجی وب سرویس 200 نباشد این خطا رخ می دهد
-            return $e;
+            return response($e->errorMessage(),$e->getCode());
         } catch (\Kavenegar\Exceptions\HttpException $e) {
             // در زمانی که مشکلی در برقرای ارتباط با وب سرویس وجود داشته باشد این خطا رخ می دهد
-            return $e;
+            response($e->errorMessage(),$e->getCode());
         }
     }
 
