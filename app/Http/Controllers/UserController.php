@@ -49,6 +49,7 @@ class UserController extends Controller
             $message = $request['message'];
             $receptor = array($request['mobile']);
             $result = $api->Send($sender, $receptor, $message);
+            return $result;
             if ($result) {
                 $info = [
                     "messageid" => $result[0]->messageid,
