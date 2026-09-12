@@ -78,6 +78,7 @@ class UserController extends Controller
     public function verifyMobile(Request $request)
     {
         try {
+            return $request;
             $mobile = $this->faToEn($request['mobile']);
             $inputCode = $this->faToEn($request['code']);
             $code = Cache::get($mobile);
