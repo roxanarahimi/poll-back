@@ -78,17 +78,13 @@ class UserController extends Controller
     public function verifyMobile(Request $request)
     {
         try {
-            return $request;
             $mobile = $this->faToEn($request['mobile']);
             $inputCode = $this->faToEn($request['code']);
             $code = Cache::get($mobile);
             if ($code == $inputCode) {
                 $user = User::where('mobile', $mobile)->first();
                 if (!$user) {
-                    $fields = new Request([
-                        'mobile' => $mobile,
-                    ]);
-                    $user = $this->store($fields);
+                   $user = User::create(['mobile' => $mobile]);
                 }
                 return response(['user' => new UserResource($user), 'message' => 'شماره موبایل با موفقیت تایید شد.'], 200);
             } else {
