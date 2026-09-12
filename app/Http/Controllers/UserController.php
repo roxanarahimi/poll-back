@@ -37,7 +37,7 @@ class UserController extends Controller
                 return $send;
             }
         } catch (\Exception $exception) {
-            return $exception;
+            return response($exception, $exception->getCode());
         }
     }
 
@@ -81,7 +81,7 @@ class UserController extends Controller
             $mobile = $this->faToEn($request['mobile']);
             $inputCode = $this->faToEn($request['code']);
             $code = Cache::get($mobile);
-
+            return $code;
             if ($code === $inputCode) {
                 $user = User::where('mobile', $mobile)->first();
                 if (!$user) {
@@ -95,7 +95,7 @@ class UserController extends Controller
                 return response(['message' => 'کد وارد شده اشتباه است.'], 422);
             }
         } catch (\Exception $exception) {
-            return $exception;
+            return response($exception, $exception->getCode());
         }
     }
 
@@ -108,7 +108,7 @@ class UserController extends Controller
             }
             return response($user, 201);
         } catch (\Exception $exception) {
-            return $exception;
+            return response($exception, $exception->getCode());
         }
     }
 
@@ -127,8 +127,8 @@ class UserController extends Controller
         try {
             $data = Question::orderBy('id')->get();
             return response(QuestionResource::collection($data), 200);
-        } catch (\Exception $e) {
-            return $e->getMessage();
+        } catch (\Exception $exception) {
+            return response($exception, $exception->getCode());
         }
     }
 
@@ -144,8 +144,8 @@ class UserController extends Controller
 
             $user = User::find($request['user_id']);
             return response(new UserResource($user), 200);
-        } catch (\Exception $e) {
-            return $e->getMessage();
+        } catch (\Exception $exception) {
+            return response($exception, $exception->getCode());
         }
     }
 }
