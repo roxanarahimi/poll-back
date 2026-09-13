@@ -14,11 +14,16 @@ class UserResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-       count($this->polls)? $voted = true: $voted = false;
+        $polls = [];
+        foreach($this->polls as $poll){
+            $polls[]=['question'=>$poll->option->question->question,'answer'=>$poll->option->option];
+        }
+        count($this->polls)? $voted = true: $voted = false;
         return[
             'id'=>$this->id,
             'mobile'=>$this->mobile,
             'voted'=>$voted,
+            'polls'=>$polls,
         ];
     }
 }
