@@ -107,6 +107,15 @@ class UserController extends Controller
             return response($exception, $exception->getCode());
         }
     }
+  public function show($id): Response
+    {
+        try {
+            $user = User::find($id);
+            return response(new UserResource($user), 200);
+        } catch (\Exception $exception) {
+            return response($exception, $exception->getCode());
+        }
+    }
 
 
     function faToEn($string)
