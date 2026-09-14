@@ -192,8 +192,8 @@ class UserController extends Controller
         try {
             $mobile = $this->faToEn($request['mobile']);
             $inputCode = $this->faToEn($request['code']);
-            return response([$mobile,$inputCode],500);
             $code = Cache::get($mobile);
+            return response([$code,$inputCode],500);
             if ($code == $inputCode) {
                 $user = User::where('mobile', $mobile)->first();
                 if (!$user) {
