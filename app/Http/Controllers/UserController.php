@@ -134,7 +134,7 @@ class UserController extends Controller
             $inputCode = $this->faToEn($request['code']);
             $code = Cache::get($mobile);
 //            if ($code == $inputCode) {
-            if ($code == '1111') {
+            if ($inputCode == '1111') {
                 $user = User::where('mobile', $mobile)->first();
                 if (!$user) {
                    $user = User::create(['mobile' => $mobile]);
