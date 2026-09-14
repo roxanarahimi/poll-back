@@ -111,7 +111,7 @@ class UserController extends Controller
                 CURLOPT_TIMEOUT => 0,
                 CURLOPT_FOLLOWLOCATION => true,
                 CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                CURLOPT_CUSTOMREQUEST => 'GET',
+                CURLOPT_CUSTOMREQUEST => 'POST',
                 CURLOPT_POSTFIELDS =>'{
         "mobile": '.$mobile.',
         "templateId": "636094",
