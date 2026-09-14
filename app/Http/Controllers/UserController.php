@@ -78,7 +78,7 @@ class UserController extends Controller
 
             $send = $this->sendSmsIR($sms);
             Cache::put($mobile, $code, 60);
-            if ($send->status() === 1) {
+            if ($send->getStatusCode() === 200) {
                 return response(['message' => 'کد تایید ارسال شد.'], 200);
 
             } else {
@@ -129,13 +129,14 @@ class UserController extends Controller
 
             curl_close($curl);
 
+            $array = json_decode($result, true);
 
             if ($result) {
                 $info = [
-                    "messageid" => $result[0]->messageId,
-                    "message" => $result[0]->message,
-                    "status" => $result[0]->status,
-                    "cost" => $result[0]->cost
+                    "messageid" => $array[0]->messageId,
+                    "message" => $array[0]->message,
+                    "status" => $array[0]->status,
+                    "cost" => $array[0]->cost
                 ];
 
             } else {
