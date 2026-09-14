@@ -93,11 +93,10 @@ class UserController extends Controller
     {
         try {
 
-            $mobile = $request['mobile'];
+            $mobile = (string)$request['mobile'];
             $code = rand(1001, 9999);
 
 
-            return response($mobile,500);
             $curl = curl_init();
 
             curl_setopt_array($curl, array(
