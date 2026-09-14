@@ -82,7 +82,7 @@ class UserController extends Controller
 
             $send = $this->sendSms($sms);
             Cache::put($mobile, $code, 60);
-            if ($send->getStatusCode() === 200) {
+            if ($send->status() === 1) {
                 return response(['message' => 'کد تایید ارسال شد.'], 200);
 
             } else {
@@ -96,20 +96,49 @@ class UserController extends Controller
     public function sendSms(Request $request): Response
     {
         try {
-            $api = new \Kavenegar\KavenegarApi("4470686233536566795848666962306F59327335574D786772655075704668586C31415162524E717747413D");
-            $sender = "10008252";
-            $message = $request['message'];
-            $receptor = $request['mobile'];
-            $result = $api->Send($sender, $receptor, $message);
+
+            $mobile = $request['mobile'];
+            $code = rand(1001, 9999);
+
+
+            $curl = curl_init();
+
+            curl_setopt_array($curl, array(
+                CURLOPT_URL => 'https://api.sms.ir/v1/send/verify',
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_ENCODING => '',
+                CURLOPT_MAXREDIRS => 10,
+                CURLOPT_TIMEOUT => 0,
+                CURLOPT_FOLLOWLOCATION => true,
+                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                CURLOPT_CUSTOMREQUEST => 'POST',
+                CURLOPT_POSTFIELDS =>'{
+        "mobile": '.$mobile.',
+        "templateId": "636094",
+        "parameters": [
+          {
+              "name":"CODE",
+              "value": '.$code.'
+          }
+        ]
+      }',
+                CURLOPT_HTTPHEADER => array(
+                    'Content-Type: application/json',
+                    'Accept: text/plain',
+                    'x-api-key: LN17h7NQHKpydoGr6IYSrb5z12q0PKP9ZTbo6BFc4ZbMPv37'
+                ),
+            ));
+
+            $result = curl_exec($curl);
+
+            curl_close($curl);
+
+
             if ($result) {
                 $info = [
-                    "messageid" => $result[0]->messageid,
+                    "messageid" => $result[0]->messageId,
                     "message" => $result[0]->message,
                     "status" => $result[0]->status,
-                    "statustext" => $result[0]->statustext,
-                    "sender" => $result[0]->sender,
-                    "receptor" => $result[0]->receptor,
-                    "date" => $result[0]->date,
                     "cost" => $result[0]->cost
                 ];
 
@@ -133,8 +162,7 @@ class UserController extends Controller
             $mobile = $this->faToEn($request['mobile']);
             $inputCode = $this->faToEn($request['code']);
             $code = Cache::get($mobile);
-//            if ($code == $inputCode) {
-            if ($inputCode == '1111') {
+            if ($code == $inputCode) {
                 $user = User::where('mobile', $mobile)->first();
                 if (!$user) {
                    $user = User::create(['mobile' => $mobile]);
