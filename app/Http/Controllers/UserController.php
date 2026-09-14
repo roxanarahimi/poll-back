@@ -69,15 +69,12 @@ class UserController extends Controller
 //            if ($user && $user->role === 'admin') {
 //                return response(['message' => 'این شماره موبایل قابل استفاده نیست. لطفا با شماره دیگری تلاش کنید.'], 422);
 //            }
-            $code = rand(1001, 9999);
-            $text = ' به نودالیت خوش آمدید. کد تایید شما:' . $code;
+
             $sms = new Request([
                 'mobile' => $mobile,
-                'message' => $text,
             ]);
 
             $send = $this->sendSmsIR($sms);
-            Cache::put($mobile, $code, 60);
             if ($send->getStatusCode() === 200) {
                 return response(['message' => 'کد تایید ارسال شد.'], 200);
 
@@ -95,7 +92,7 @@ class UserController extends Controller
 
             $mobile = $request['mobile'];
             $code = rand(1001, 9999);
-
+            Cache::put($mobile, $code, 60);
 
             $curl = curl_init();
 
