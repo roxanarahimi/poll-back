@@ -129,8 +129,9 @@ class UserController extends Controller
 
             curl_close($curl);
 
-            $array = json_decode($result, true);
 
+            $array = json_decode($result, true);
+            return[$result,$array];
             if ($result) {
                 $info = [
                     "messageid" => $array['messageId'],
