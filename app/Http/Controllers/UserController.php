@@ -38,7 +38,7 @@ class UserController extends Controller
                 CURLOPT_CUSTOMREQUEST => 'POST',
                 CURLOPT_POSTFIELDS =>'{
         "mobile": "09128222725",
-        "templateId": "123456",
+        "templateId": "636094",
         "parameters": [
           {
               "name":"CODE",
