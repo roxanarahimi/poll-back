@@ -89,7 +89,7 @@ class UserController extends Controller
                 return $send;
             }
         } catch (\Exception $exception) {
-            return response($exception, $exception->getCode());
+            return $exception;
         }
     }
 
