@@ -13,6 +13,58 @@ use Illuminate\Support\Facades\Cache;
 
 class UserController extends Controller
 {
+    public function test()
+    {
+        try{
+            //        $curl = curl_init();
+            $no = '500033003';
+
+            $method = 'POST';
+
+            $code = '1234';
+            $text = ' به نودالیت خوش آمدید. کد تایید شما:' . $code;
+
+
+            $curl = curl_init();
+
+            curl_setopt_array($curl, array(
+                CURLOPT_URL => 'https://api.sms.ir/v1/send/verify',
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_ENCODING => '',
+                CURLOPT_MAXREDIRS => 10,
+                CURLOPT_TIMEOUT => 0,
+                CURLOPT_FOLLOWLOCATION => true,
+                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                CURLOPT_CUSTOMREQUEST => 'POST',
+                CURLOPT_POSTFIELDS =>'{
+        "mobile": "09128222725",
+        "templateId": "123456",
+        "parameters": [
+          {
+              "name":"CODE",
+              "value": '.$code.'
+          }
+        ]
+      }',
+                CURLOPT_HTTPHEADER => array(
+                    'Content-Type: application/json',
+                    'Accept: text/plain',
+                    'x-api-key: LN17h7NQHKpydoGr6IYSrb5z12q0PKP9ZTbo6BFc4ZbMPv37'
+                ),
+            ));
+
+            $response = curl_exec($curl);
+
+            curl_close($curl);
+
+            return response($response,200);
+        }catch (\Exception $exception){
+            return response($exception,$exception->getCode());
+        }
+
+
+    }
+
     public function sendOtp(Request $request)
     {
         try {
