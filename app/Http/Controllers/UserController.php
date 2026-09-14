@@ -64,7 +64,7 @@ class UserController extends Controller
     public function sendOtp(Request $request)
     {
         try {
-            $mobile = (string)$this->faToEn($request['mobile']);
+            $mobile = $this->faToEn($request['mobile']);
 //            $user = User::where('mobile', $mobile)->first();
 //            if ($user && $user->role === 'admin') {
 //                return response(['message' => 'این شماره موبایل قابل استفاده نیست. لطفا با شماره دیگری تلاش کنید.'], 422);
@@ -93,7 +93,7 @@ class UserController extends Controller
     {
         try {
 
-            $mobile = (string)$request['mobile'];
+            $mobile = $request['mobile'];
             $code = rand(1001, 9999);
 
 
