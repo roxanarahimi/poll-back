@@ -133,10 +133,10 @@ class UserController extends Controller
 
             if ($result) {
                 $info = [
-                    "messageid" => $array->messageId,
-                    "message" => $array->message,
-                    "status" => $array->status,
-                    "cost" => $array->cost
+                    "messageid" => $array['messageId'],
+                    "message" => $array['message'],
+                    "status" => $array['status'],
+                    "cost" => $array['cost']
                 ];
 
             } else {
