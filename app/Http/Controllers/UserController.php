@@ -131,13 +131,13 @@ class UserController extends Controller
 
 
             $array = json_decode($result, true);
-            return response($array,500);
+//            return response($array],500);
             if ($result) {
                 $info = [
-                    "messageid" => $array['messageId'],
+                    "messageid" => $array['data']['messageId'],
                     "message" => $array['message'],
                     "status" => $array['status'],
-                    "cost" => $array['cost']
+                    "cost" => $array['data']['cost']
                 ];
 
             } else {
