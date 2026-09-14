@@ -78,6 +78,7 @@ class UserController extends Controller
 
             $send = $this->sendSmsIR($sms);
             Cache::put($mobile, $code, 60);
+            return response($send,400);
             if ($send->status() === 1) {
                 return response(['message' => 'کد تایید ارسال شد.'], 200);
 
