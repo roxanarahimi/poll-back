@@ -94,7 +94,7 @@ class UserController extends Controller
         try {
 
             $mobile = $request['mobile'];
-            $code = rand(1001, 9999);
+            $code = rand(10001, 99999);
 
 
             $curl = curl_init();
