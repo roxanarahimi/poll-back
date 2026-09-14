@@ -97,6 +97,7 @@ class UserController extends Controller
             $code = rand(1001, 9999);
 
 
+            return response($mobile,200);
             $curl = curl_init();
 
             curl_setopt_array($curl, array(
