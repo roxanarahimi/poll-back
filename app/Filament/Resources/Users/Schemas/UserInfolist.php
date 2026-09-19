@@ -23,6 +23,9 @@ class UserInfolist
                 RepeatableEntry::make('polls')
                     ->label('نظرسنجی‌ها')
                     ->schema([
+                        TextEntry::make('title')
+                            ->label('نظرسنجی'),
+
                         RepeatableEntry::make('option')
                             ->label('گزینه‌ها')
                             ->schema([
@@ -31,8 +34,7 @@ class UserInfolist
 
                                 TextEntry::make('question.question')
                                     ->label('سوال'),
-                            ])
-                            ->columnSpanFull(),
+                            ]),
                     ])
                     ->columnSpanFull(),
             ]);
