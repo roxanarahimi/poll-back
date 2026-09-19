@@ -15,12 +15,9 @@ class QuestionOptionInfolist
 
 
                 TextEntry::make('option.option')->label('متن پاسخ'),
-                RepeatableEntry::make('polls')
-                    ->label('انتخاب شده توسط کاربران')
-                    ->schema([
-                        TextEntry::make('user.mobile')
-                            ->label('شماره موبایل'),
-                    ])
+                TextEntry::make('polls_count')
+                    ->label('تعداد انتخاب کاربران')
+                    ->state(fn ($record) => $record->polls()->count())
                     ->columnSpanFull(),
             ]);
     }
