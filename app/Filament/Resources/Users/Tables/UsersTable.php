@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Users\Tables;
 
+use App\Http\Controllers\DateController;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
@@ -15,9 +16,17 @@ class UsersTable
     {
         return $table
             ->columns([
+
                 TextColumn::make('mobile')
-                    ->label('شماره موبایل')
-                    ->searchable(),
+                    ->label('موبایل'),
+                TextColumn::make('name')
+                    ->label('نام'),
+                TextColumn::make('email')
+                    ->label('ایمیل'),
+                TextColumn::make('created_at')
+                    ->label('تاریخ عضویت')
+                    ->formatStateUsing(fn($state) => explode(' ', (new DateController())->toPersian($state))[0]),
+
             ])
             ->filters([
                 //
