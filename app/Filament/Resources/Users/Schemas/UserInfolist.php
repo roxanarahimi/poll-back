@@ -21,7 +21,7 @@ class UserInfolist
                     ->label('تاریخ عضویت')
                     ->formatStateUsing(fn($state) => explode(' ', (new DateController())->toPersian($state))[0]),
                 RepeatableEntry::make('polls')
-                    ->label('نظرسنجی‌ها')
+                    ->label('پاسخ های کاربر')
                     ->schema([
                         TextEntry::make('option.question.question')
                             ->label('سوال'),
