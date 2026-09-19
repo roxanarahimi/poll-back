@@ -12,13 +12,6 @@ class QuestionOptionInfolist
     {
         return $schema
             ->components([
-
-
-                TextEntry::make('option.option')->label('متن پاسخ'),
-                TextEntry::make('polls_count')
-                    ->label('تعداد انتخاب کاربران')
-                    ->state(fn ($record) => $record->polls()->count())
-                    ->columnSpanFull(),
             ]);
     }
 }
