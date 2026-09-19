@@ -25,13 +25,6 @@ class UserInfolist
                     ->schema([
                         RepeatableEntry::make('option')
                             ->label('گزینه‌ها')
-                            ->schema([
-                                TextEntry::make('option')
-                                    ->label('گزینه'),
-
-                                TextEntry::make('question.question')
-                                    ->label('سوال'),
-                            ]),
                     ])
                     ->columnSpanFull(),
             ]);
