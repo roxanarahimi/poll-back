@@ -13,14 +13,6 @@ class UserPollInfolist
         return $schema
             ->components([
 
-                        TextEntry::make('option.option')->lable('متن پاسخ'),
-                 RepeatableEntry::make('polls')
-                    ->label('انتخاب شده توسط کاربران')
-                    ->schema([
-                        TextEntry::make('user.mobile')
-                            ->label('شماره موبایل'),
-                    ])
-                    ->columnSpanFull(),
             ]);
     }
 }
