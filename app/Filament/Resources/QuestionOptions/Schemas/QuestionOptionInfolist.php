@@ -13,7 +13,8 @@ class QuestionOptionInfolist
         return $schema
             ->components([
 
-                TextEntry::make('option')->lable('متن پاسخ'),
+
+                TextEntry::make('option.option')->label('متن پاسخ'),
                 RepeatableEntry::make('polls')
                     ->label('انتخاب شده توسط کاربران')
                     ->schema([
